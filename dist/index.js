@@ -8,9 +8,9 @@ var _schemas = require('./schemas');
 
 var _schemas2 = _interopRequireDefault(_schemas);
 
-var _routes = require('./routes');
+var _v = require('./routes/v1');
 
-var _routes2 = _interopRequireDefault(_routes);
+var _v2 = _interopRequireDefault(_v);
 
 var _split = require('split2');
 
@@ -35,7 +35,7 @@ var shared = {
     db: 'xxx'
 };
 
-fastify.decorateRequest('verify', function () {
+fastify.decorateRequest('verifyAuthentication', function () {
     this.isLoggedIn = true;
 });
 
@@ -48,14 +48,14 @@ fastify.decorate('random', function () {
 });
 
 fastify.addHook('preHandler', function (req, reply, done) {
-    // req.verify();
-    fastify.util(req, 'timestamp', new Date());
+    // este código executa a cada requisição, indistintamente
+
+    // req.verifyAuthentication();    
+    // setTimeout(done,1000);
     done();
 });
 
-fastify.register(_routes2.default, shared, function (err) {
-    if (err) throw err;
-});
+fastify.register(_v2.default, { prefix: '/v1' });
 
 fastify.listen(3000, function (err) {
     if (err) throw err;

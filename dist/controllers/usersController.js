@@ -109,7 +109,50 @@ exports.default = {
 
         return chained;
     }(),
+
     decorate: function decorate(request, reply) {
         reply.send(fastify.random);
-    }
+    },
+
+    withOptions: function withOptions(options, request, reply) {
+        reply.send({ mode: 'options', options: options });
+    },
+
+    optionsPromise: function () {
+        var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+            var executionResult, finalResult;
+            return _regenerator2.default.wrap(function _callee3$(_context3) {
+                while (1) {
+                    switch (_context3.prev = _context3.next) {
+                        case 0:
+                            _context3.next = 2;
+                            return proceed();
+
+                        case 2:
+                            _context3.next = 4;
+                            return execute();
+
+                        case 4:
+                            executionResult = _context3.sent;
+                            _context3.next = 7;
+                            return result(executionResult);
+
+                        case 7:
+                            finalResult = _context3.sent;
+                            return _context3.abrupt('return', finalResult);
+
+                        case 9:
+                        case 'end':
+                            return _context3.stop();
+                    }
+                }
+            }, _callee3, this);
+        }));
+
+        function optionsPromise() {
+            return _ref3.apply(this, arguments);
+        }
+
+        return optionsPromise;
+    }()
 };
