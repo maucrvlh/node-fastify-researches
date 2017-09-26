@@ -38,6 +38,7 @@ fastify.extendServerError((error) => {
     console.log('Error: %s', error)
     return {
         status: 'error',
+        error: 'overwrited',
         timestamp: Date.now()
     }
 });

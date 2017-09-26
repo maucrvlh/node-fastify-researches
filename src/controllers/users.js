@@ -73,6 +73,7 @@ export default {
         },
         genError: {
             handler: function (request, reply) {
+                console.log(reply.store);
                 reply.code(501);
                 reply.send(new Error('não foi.'));
             }
